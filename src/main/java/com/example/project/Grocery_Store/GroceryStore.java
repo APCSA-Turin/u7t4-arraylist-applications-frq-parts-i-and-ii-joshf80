@@ -1,5 +1,7 @@
 package com.example.project.Grocery_Store;
 import java.util.ArrayList;
+
+import javax.swing.plaf.TreeUI;
 public class GroceryStore {
     /** An array of products normally stocked at the grocery store
      *  Guaranteed not to be null and to contain only non-null entries
@@ -14,8 +16,15 @@ public class GroceryStore {
      *  productsStocked array that need to be reordered, as described in part (a)
      *  Precondition: min > 0 */
     public ArrayList<Integer> getReorderList(int min) {
-        /* to be implemented in part (a) */
-        return new ArrayList<Integer>();
+        ArrayList<Integer> arrayList = new ArrayList<Integer>();
+
+        for (int i = 0; i < productsStocked.length; i++) {
+            if (productsStocked[i].getQuantity() <= min) {
+                arrayList.add(i);
+            }
+        }
+
+        return arrayList;
     }
 
     /** Returns true if all products named in shoppingList are available for purchase
@@ -24,7 +33,11 @@ public class GroceryStore {
      *  in the productsStocked array.
      */
     public boolean checkAvailability(ArrayList<String> shoppingList) {
-        /* to be implemented in part (b) */
-        return false;
+        for (int i = 0; i < productsStocked.length; i++) {
+            if (shoppingList.indexOf(productsStocked[i].getName()) != -1 && productsStocked[i].getQuantity() == 0) {
+                return false;
+            }
+        }
+        return true;
     }
 }
